@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Post-it</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+<main class="board">
+
+    <!-- ================================
+         CABECERA
+    ================================= -->
+
+    <header class="board-header">
+
+        <h1>Mis Post-it</h1>
+
+        <nav class="main-tabs">
+
+            <button
+                class="tab-button active"
+                data-tab="postits"
+            >
+                POST-IT
+            </button>
+
+            <button
+                class="tab-button"
+                data-tab="notebook"
+            >
+                CUADERNO
+            </button>
+
+            <button
+                class="tab-button"
+                data-tab="my-notes"
+            >
+                MIS NOTAS
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ==================================================
+         VISTA POST-IT
+    =================================================== -->
+
+    <div id="postits-view" class="tab-view active">
+
+
+        <!-- ================================
+             TAREAS
+        ================================= -->
+
+        <section class="task-section">
+
+            <div class="section-title">
+
+                <span class="title-dot"></span>
+
+                <h2>Notas de trabajo</h2>
+
+            </div>
+
+
+            <div class="task-board">
+
+
+                <!-- NOTAS PARA TODOS -->
+
+                <article
+                    class="note all-note"
+                    data-storage="all-notes"
+                >
+
+                    <div class="note-heading">
+                        NOTAS PARA TODOS
+                    </div>
+
+                    <button
+                        class="delete-note"
+                        aria-label="Borrar nota"
+                    >×</button>
+
+                    <div
+                        class="note-content large-content"
+                        contenteditable="true"
+                        spellcheck="true"
+                        data-placeholder="Escribe aquí una nota para todos..."
+                    ></div>
+
+                </article>
+
+
+                <!-- URGENTE 1 -->
+
+                <article
+                    class="note urgent urgent-1"
+                    data-storage="urgent-1"
+                >
+
+                    <div class="note-heading">
+                        URGENTE PARA:
+
+                        <input
+                            class="recipient-input"
+                            type="text"
+                            placeholder="..."
+                        >
+                    </div>
+
+                    <button
+                        class="delete-note"
+                        aria-label="Borrar nota"
+                    >×</button>
+
+                    <div
+                        class="note-content"
+                        contenteditable="true"
+                        spellcheck="true"
+                        data-placeholder="Escribe la tarea..."
+                    ></div>
+
+                </article>
+
+
+                <!-- URGENTE 2 -->
+
+                <article
+                    class="note urgent urgent-2"
+                    data-storage="urgent-2"
+                >
+
+                    <div class="note-heading">
+                        URGENTE PARA:
+
+                        <input
+                            class="recipient-input"
+                            type="text"
+                            placeholder="..."
+                        >
+                    </div>
+
+                    <button
+                        class="delete-note"
+                        aria-label="Borrar nota"
+                    >×</button>
+
+                    <div
+                        class="note-content"
+                        contenteditable="true"
+                        spellcheck="true"
+                        data-placeholder="Escribe la tarea..."
+                    ></div>
+
+                </article>
+
+
+                <!-- URGENTE 3 -->
+
+                <article
+                    class="note urgent urgent-3"
+                    data-storage="urgent-3"
+                >
+
+                    <div class="note-heading">
+                        URGENTE PARA:
+
+                        <input
+                            class="recipient-input"
+                            type="text"
+                            placeholder="..."
+                        >
+                    </div>
+
+                    <button
+                        class="delete-note"
+                        aria-label="Borrar nota"
+                    >×</button>
+
+                    <div
+                        class="note-content"
+                        contenteditable="true"
+                        spellcheck="true"
+                        data-placeholder="Escribe la tarea..."
+                    ></div>
+
+                </article>
+
+
+                <!-- IMPORTANTE 1 -->
+
+                <article
+                    class="note important important-1"
+                    data-storage="important-1"
+                >
+
+                    <div class="note-heading">
+                        NOTAS PARA:
+
+                        <input
+                            class="recipient-input"
+                            type="text"
+                            placeholder="..."
+                        >
+                    </div>
+
+                    <button
+                        class="delete-note"
+                        aria-label="Borrar nota"
+                    >×</button>
+
+                    <div
+                        class="note-content"
+                        contenteditable="true"
+                        spellcheck="true"
+                        data-placeholder="Escribe la nota..."
+                    ></div>
+
+                </article>
+
+
+                <!-- IMPORTANTE 2 -->
+
+                <article
+                    class="note important important-2"
+                    data-storage="important-2"
+                >
+
+                    <div class="note-heading">
+                        NOTAS PARA:
+
+                        <input
+                            class="recipient-input"
+                            type="text"
+                            placeholder="..."
+                        >
+                    </div>
+
+                    <button
+                        class="delete-note"
+                        aria-label="Borrar nota"
+                    >×</button>
+
+                    <div
+                        class="note-content"
+                        contenteditable="true"
+                        spellcheck="true"
+                        data-placeholder="Escribe la nota..."
+                    ></div>
+
+                </article>
+
+
+                <!-- IMPORTANTE 3 -->
+
+                <article
+                    class="note important important-3"
+                    data-storage="important-3"
+                >
+
+                    <div class="note-heading">
+                        NOTAS PARA:
+
+                        <input
+                            class="recipient-input"
+                            type="text"
+                            placeholder="..."
+                        >
+                    </div>
+
+                    <button
+                        class="delete-note"
+                        aria-label="Borrar nota"
+                    >×</button>
+
+                    <div
+                        class="note-content"
+                        contenteditable="true"
+                        spellcheck="true"
+                        data-placeholder="Escribe la nota..."
+                    ></div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================
+             ANOTADORES
+        ================================= -->
+
+        <section class="temporary-section">
+
+            <div class="section-title temporary-title">
+
+                <span class="title-dot"></span>
+
+                <div>
+
+                    <h2>Anotadores</h2>
+
+                    <span class="temporary-warning">
+                        Se borran al cerrar el navegador
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="notes-grid">
+
+
+                <!-- CALENDARIO MENSUAL -->
+                <article class="note calendar-note" aria-label="Calendario mensual">
+                    <div class="calendar-header">
+                        <div class="calculator-title">CALENDARIO</div>
+                        <div class="calendar-month-controls">
+                            <button type="button" id="calendar-prev" class="calendar-nav" aria-label="Mes anterior">‹</button>
+                            <strong id="calendar-month-label"></strong>
+                            <button type="button" id="calendar-next" class="calendar-nav" aria-label="Mes siguiente">›</button>
+                        </div>
+                    </div>
+
+                    <div class="calendar-weekdays" aria-hidden="true">
+                        <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
+                    </div>
+                    <div id="calendar-days" class="calendar-days"></div>
+
+                    <div class="calendar-selected">
+                        <div id="calendar-selected-label" class="calendar-selected-label"></div>
+                        <div class="calendar-color-controls" aria-label="Color del día">
+                            <span>Color:</span>
+                            <button type="button" class="calendar-color-button color-green" data-color="green" aria-label="Marcar día en verde" title="Verde"></button>
+                            <button type="button" class="calendar-color-button color-yellow" data-color="yellow" aria-label="Marcar día en amarillo" title="Amarillo"></button>
+                            <button type="button" class="calendar-color-button color-red" data-color="red" aria-label="Marcar día en rojo" title="Rojo"></button>
+                            <button type="button" class="calendar-color-clear" id="calendar-color-clear">Quitar</button>
+                        </div>
+                        <div id="calendar-events" class="calendar-events"></div>
+                        <form id="calendar-event-form" class="calendar-event-form">
+                            <input id="calendar-event-input" type="text" maxlength="240" placeholder="Anotar tarea o evento..." aria-label="Anotación para el día seleccionado">
+                            <label class="calendar-range-label" for="calendar-event-end">Hasta:</label>
+                            <input id="calendar-event-end" type="date" aria-label="Fecha de finalización (opcional)">
+                            <button type="submit" aria-label="Guardar anotación">+</button>
+                        </form>
+                    </div>
+                </article>
+
+
+                <!-- BLANCO 2 -->
+
+                <article class="note temporary">
+
+                    <div class="note-heading">
+                        ANOTADOR
+                    </div>
+
+                    <button
+                        class="delete-note"
+                        aria-label="Borrar nota"
+                    >×</button>
+
+                    <div
+                        class="note-content"
+                        contenteditable="true"
+                        spellcheck="true"
+                        data-placeholder="Anota algo..."
+                    ></div>
+
+                </article>
+
+<!-- CALCULADORA -->
+
+                <article class="note calculator-note">
+
+                    <div class="calculator">
+
+                        <div class="calculator-title">
+                            CALCULADORA
+                        </div>
+
+                        <input
+                            type="text"
+                            id="calc-display"
+                            class="calc-display"
+                            value="0"
+                            readonly
+                        >
+
+                        <div class="calculator-buttons">
+
+                            <button data-calc="clear">C</button>
+                            <button data-calc="backspace">⌫</button>
+                            <button data-value="%">%</button>
+                            <button data-value="/">÷</button>
+
+                            <button data-value="7">7</button>
+                            <button data-value="8">8</button>
+                            <button data-value="9">9</button>
+                            <button data-value="*">×</button>
+
+                            <button data-value="4">4</button>
+                            <button data-value="5">5</button>
+                            <button data-value="6">6</button>
+                            <button data-value="-">−</button>
+
+                            <button data-value="1">1</button>
+                            <button data-value="2">2</button>
+                            <button data-value="3">3</button>
+                            <button data-value="+">+</button>
+
+                            <button data-value="0" class="zero">0</button>
+                            <button data-value=".">.</button>
+                            <button data-calc="equals" class="equals">=</button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- ==================================================
+         MIS NOTAS
+    ================================================== -->
+
+    <section id="my-notes-view" class="tab-view my-notes-view">
+        <div class="my-notes-header">
+            <div>
+                <h2 id="my-notes-welcome">Mis notas</h2>
+                <p>Post-it urgentes e importantes de la pizarra.</p>
+            </div>
+            <button id="change-my-notes-user" class="change-user-button" type="button">Cambiar usuario</button>
+        </div>
+        <div id="my-notes-grid" class="my-notes-grid"></div>
+        <p id="my-notes-empty" class="my-notes-empty" hidden>No tienes notas asignadas. Puedes escribir en tus Post-it personales.</p>
+    </section>
+
+
+    <!-- ==================================================
+         CUADERNO
+    =================================================== -->
+
+    <div
+        id="notebook-view"
+        class="tab-view notebook-view"
+    >
+
+        <div class="notebook">
+
+            <div class="notebook-cover">
+
+                <div class="notebook-title">
+                    CUADERNO
+                </div>
+
+                <div class="notebook-subtitle">
+                    HISTORIAL DE NOTAS
+                </div>
+
+            </div>
+
+
+            <div class="notebook-page">
+
+                <div
+                    id="empty-notebook"
+                    class="empty-notebook"
+                >
+                    Todavía no has borrado ninguna nota.
+                </div>
+
+                <div
+                    id="deleted-notes"
+                    class="deleted-notes"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script src="./script.js"></script>
+
+</body>
+</html>

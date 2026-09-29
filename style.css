@@ -1,0 +1,2058 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: #3e3a35;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(255,255,255,.95),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(210,205,195,.4),
+            transparent 40%
+        ),
+        #eeece5;
+}
+
+
+/* =====================================
+   TABLERO
+===================================== */
+
+.board {
+    width: min(1260px, calc(100% - 28px));
+
+    margin: auto;
+
+    padding: 24px 0 35px;
+}
+
+
+/* =====================================
+   TITULO PRINCIPAL
+===================================== */
+
+.board-header {
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+.board-header h1 {
+    margin: 0;
+
+    font-size: 25px;
+    font-weight: 600;
+
+    color: #5b5750;
+}
+
+
+/* =====================================
+   SECCIÓN
+===================================== */
+
+.section-title {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 0 0 7px 7px;
+}
+
+.section-title h2 {
+    margin: 0;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    color: #77736c;
+}
+
+.title-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #c66c6c;
+}
+
+.temporary-title {
+    align-items: flex-start;
+}
+
+.temporary-title .title-dot {
+    background: #99958c;
+
+    margin-top: 5px;
+}
+
+.temporary-warning {
+    display: block;
+
+    margin-top: 1px;
+
+    font-size: 9px;
+
+    letter-spacing: .5px;
+
+    color: #aaa49a;
+}
+
+
+/* =====================================
+   TABLERO DE TAREAS
+===================================== */
+
+.task-section {
+    margin-bottom: 22px;
+}
+
+.task-board {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    grid-template-rows:
+        190px 190px;
+
+    gap: 9px;
+
+    padding: 3px 7px 6px;
+}
+
+
+/* =====================================
+   POST-IT GENERAL
+===================================== */
+
+.note {
+    position: relative;
+
+    min-width: 0;
+
+    padding: 20px 20px;
+
+    --rotation: 0deg;
+    --offset: 0px;
+    --paper-color: #fff;
+
+    transform:
+        rotate(var(--rotation))
+        translateY(var(--offset));
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+
+    box-shadow:
+        0 5px 9px rgba(50,45,35,.12),
+        0 12px 20px rgba(50,45,35,.07);
+
+    isolation: isolate;
+
+    overflow: visible;
+}
+
+
+/* Papel */
+
+.note::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -1;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.13),
+            transparent 45%
+        ),
+        var(--paper-color);
+
+    clip-path: polygon(
+        0 0,
+        99% 1%,
+        100% 96%,
+        96% 100%,
+        2% 99%,
+        0 96%
+    );
+}
+
+
+/* Esquina */
+
+.note::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 34px;
+    height: 34px;
+
+    background:
+        linear-gradient(
+            135deg,
+            transparent 48%,
+            rgba(90,75,50,.10) 49%,
+            rgba(255,255,255,.65) 51%
+        );
+
+    clip-path: polygon(
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+
+    pointer-events: none;
+}
+
+
+/* =====================================
+   COLORES
+===================================== */
+
+.all-note {
+    --paper-color: #f3df78;
+
+    /*
+       Ocupa toda la primera columna,
+       tanto la zona roja como amarilla.
+    */
+
+    grid-column: 1;
+    grid-row: 1 / span 2;
+
+    min-height: 389px;
+}
+
+.urgent {
+    --paper-color: #f0a0a0;
+}
+
+.important {
+    --paper-color: #f4dc76;
+}
+
+.temporary {
+    --paper-color: #fffdf7;
+}
+
+
+/* =====================================
+   POSICIONES
+===================================== */
+
+.all-note {
+    --rotation: -1deg;
+    --offset: 2px;
+}
+
+.urgent-1 {
+    --rotation: 1.1deg;
+    --offset: -2px;
+
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.urgent-2 {
+    --rotation: -.7deg;
+    --offset: 3px;
+
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.urgent-3 {
+    --rotation: 1.5deg;
+    --offset: -1px;
+
+    grid-column: 4;
+    grid-row: 1;
+}
+
+.important-1 {
+    --rotation: -1.1deg;
+    --offset: 2px;
+
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.important-2 {
+    --rotation: .8deg;
+    --offset: -2px;
+
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.important-3 {
+    --rotation: -1.5deg;
+    --offset: 1px;
+
+    grid-column: 4;
+    grid-row: 2;
+}
+
+
+/* =====================================
+   ENCABEZADO DEL POST-IT
+===================================== */
+
+.note-heading {
+    position: relative;
+
+    z-index: 4;
+
+    margin-bottom: 12px;
+
+    padding-right: 20px;
+
+    font-family:
+        "Segoe Print",
+        "Bradley Hand",
+        "Comic Sans MS",
+        cursive;
+
+    font-size: 14px;
+
+    line-height: 1.25;
+
+    font-weight: 800;
+
+    color: #4b453d;
+}
+
+
+/* =====================================
+   CAMPO "PARA"
+===================================== */
+
+.recipient-input {
+    width: 80px;
+
+    max-width: 45%;
+
+    margin-left: 2px;
+
+    padding: 0 2px;
+
+    border: 0;
+    border-bottom: 2px solid rgba(65,58,50,.45);
+
+    outline: none;
+
+    background: transparent;
+
+    font-family:
+        "Segoe Print",
+        "Bradley Hand",
+        "Comic Sans MS",
+        cursive;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    color: #403a34;
+}
+
+.recipient-input::placeholder {
+    color: rgba(65,58,50,.35);
+}
+
+
+/* =====================================
+   TEXTO ESCRITO
+===================================== */
+
+.note-content {
+    position: relative;
+
+    z-index: 3;
+
+    min-height: 120px;
+
+    outline: none;
+
+    /*
+       Aspecto manuscrito
+    */
+
+    font-family:
+        "Segoe Print",
+        "Bradley Hand",
+        "Comic Sans MS",
+        cursive;
+
+    font-size: 20px;
+
+    line-height: 1.45;
+
+    font-weight: 800;
+
+    letter-spacing: .1px;
+
+    color: #3f3a34;
+
+    /* Ajusta el texto al ancho del Post-it, incluso si hay palabras muy largas. */
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+
+    cursor: text;
+}
+
+
+/* Nota grande */
+
+.large-content {
+    font-size: 22px;
+
+    min-height: 285px;
+}
+
+
+/* Placeholder */
+
+.note-content:empty::before {
+    content: attr(data-placeholder);
+
+    color: rgba(70,65,55,.30);
+
+    pointer-events: none;
+}
+
+
+/* =====================================
+   HOVER
+===================================== */
+
+.note:hover {
+    transform:
+        rotate(var(--rotation))
+        translateY(calc(var(--offset) - 4px))
+        scale(1.015);
+
+    box-shadow:
+        0 9px 15px rgba(50,45,35,.15),
+        0 17px 25px rgba(50,45,35,.09);
+
+    z-index: 20;
+}
+
+
+/* =====================================
+   BORRAR
+===================================== */
+
+.delete-note {
+    position: absolute;
+
+    top: 6px;
+    right: 7px;
+
+    z-index: 30;
+
+    width: 23px;
+    height: 23px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.2);
+
+    color: rgba(50,45,40,.45);
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    transition: .15s;
+}
+
+.note:hover .delete-note,
+.note:focus-within .delete-note {
+    opacity: 1;
+}
+
+.delete-note:hover {
+    background: rgba(255,255,255,.6);
+
+    color: #333;
+}
+
+
+/* =====================================
+   ANOTADORES
+===================================== */
+
+.temporary-section {
+    margin-top: 4px;
+}
+
+.notes-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 10px;
+
+    padding: 3px 7px 6px;
+}
+
+.temporary {
+    min-height: 190px;
+
+    --rotation: 0deg;
+}
+
+.note-9 {
+    --rotation: -.8deg;
+    --offset: 2px;
+}
+
+.note-10 {
+    --rotation: 1.4deg;
+    --offset: -2px;
+}
+
+.note-11 {
+    --rotation: -1.2deg;
+    --offset: 3px;
+}
+
+
+/* =====================================
+   CALCULADORA
+===================================== */
+
+.calculator-note {
+    min-height: 190px;
+
+    padding: 15px;
+
+    --paper-color: #fffdf7;
+
+    cursor: default;
+}
+
+.calculator {
+    position: relative;
+
+    z-index: 5;
+
+    width: 100%;
+}
+
+.calculator-title {
+    margin-bottom: 8px;
+
+    font-family:
+        "Segoe Print",
+        "Bradley Hand",
+        cursive;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    color: #514b43;
+}
+
+.calc-display {
+    width: 100%;
+
+    height: 34px;
+
+    margin-bottom: 8px;
+
+    padding: 4px 8px;
+
+    border: 0;
+    border-radius: 4px;
+
+    background: rgba(70,60,45,.08);
+
+    color: #3f3b35;
+
+    text-align: right;
+
+    font-family: monospace;
+
+    font-size: 17px;
+
+    outline: none;
+}
+
+.calculator-buttons {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 4px;
+}
+
+.calculator-buttons button {
+    height: 28px;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 4px;
+
+    background: rgba(70,60,45,.09);
+
+    color: #4d4942;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background .12s,
+        transform .08s;
+}
+
+.calculator-buttons button:hover {
+    background: rgba(70,60,45,.17);
+}
+
+.calculator-buttons button:active {
+    transform: scale(.94);
+}
+
+.calculator-buttons .equals {
+    background: rgba(210,175,55,.45);
+}
+
+.calculator-buttons .zero {
+    grid-column: span 2;
+}
+
+
+/* =====================================
+   TABLET
+===================================== */
+
+@media (max-width: 900px) {
+
+    .board {
+        width: calc(100% - 20px);
+    }
+
+    .task-board {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        grid-template-rows: auto;
+
+        gap: 12px;
+    }
+
+    .all-note {
+        grid-column: 1 / span 2;
+        grid-row: auto;
+
+        min-height: 250px;
+    }
+
+    .urgent-1,
+    .urgent-2,
+    .urgent-3,
+    .important-1,
+    .important-2,
+    .important-3 {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .notes-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* =====================================
+   MÓVIL
+===================================== */
+
+@media (max-width: 560px) {
+
+    .board {
+        width: calc(100% - 16px);
+
+        padding-top: 18px;
+    }
+
+    .task-board,
+    .notes-grid {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .all-note {
+        grid-column: auto;
+
+        min-height: 250px;
+    }
+
+    .note {
+        min-height: 200px;
+    }
+
+    .large-content {
+        min-height: 180px;
+    }
+
+    .note-content {
+        font-size: 19px;
+    }
+}
+/* =====================================================
+   PESTAÑAS
+===================================================== */
+
+.main-tabs {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    margin-top: 13px;
+}
+
+
+.tab-button {
+    border: 0;
+
+    padding: 8px 20px;
+
+    border-radius: 8px 8px 0 0;
+
+    background: rgba(80,75,65,.07);
+
+    color: #8a857c;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition:
+        background .15s,
+        color .15s,
+        transform .15s;
+}
+
+
+.tab-button:hover {
+    background: rgba(80,75,65,.12);
+
+    color: #5b5750;
+}
+
+
+.tab-button.active {
+    background: #f8f5ec;
+
+    color: #555149;
+
+    box-shadow:
+        0 -2px 5px rgba(50,45,35,.04);
+}
+
+
+/* =====================================================
+   VISTAS
+===================================================== */
+
+.tab-view {
+    display: none;
+}
+
+.tab-view.active {
+    display: block;
+}
+
+
+/* =====================================================
+   CUADERNO
+===================================================== */
+
+.notebook-view {
+    padding: 5px 7px 30px;
+}
+
+
+.notebook {
+    width: 100%;
+
+    min-height: 600px;
+
+    position: relative;
+
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(160,75,75,.10) 0,
+            rgba(160,75,75,.10) 2px,
+            transparent 2px
+        ),
+        #fffdf5;
+
+    box-shadow:
+        0 8px 20px rgba(50,45,35,.12),
+        0 2px 5px rgba(50,45,35,.08);
+
+    overflow: hidden;
+}
+
+
+/* Cubierta superior */
+
+.notebook-cover {
+    padding: 20px 35px 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.25),
+            transparent
+        ),
+        #dfd5bc;
+
+    border-bottom:
+        1px solid rgba(100,85,65,.18);
+}
+
+
+.notebook-title {
+    font-family:
+        "Segoe Print",
+        "Bradley Hand",
+        cursive;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    color: #51493e;
+}
+
+
+.notebook-subtitle {
+    margin-top: 2px;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color: #8a8072;
+}
+
+
+/* Página */
+
+.notebook-page {
+    min-height: 520px;
+
+    padding:
+        22px 35px 40px 58px;
+
+    position: relative;
+
+    background-image:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 34px,
+            rgba(100,130,165,.18) 35px,
+            transparent 36px
+        );
+}
+
+
+/* Línea roja del margen */
+
+.notebook-page::before {
+    content: "";
+
+    position: absolute;
+
+    left: 42px;
+    top: 0;
+    bottom: 0;
+
+    width: 1px;
+
+    background:
+        rgba(190,95,95,.30);
+}
+
+
+/* =====================================================
+   NOTA BORRADA
+===================================================== */
+
+.deleted-note {
+    position: relative;
+
+    min-height: 55px;
+
+    padding:
+        4px 45px 7px 0;
+
+    margin-bottom: 8px;
+
+    font-family:
+        "Segoe Print",
+        "Bradley Hand",
+        "Comic Sans MS",
+        cursive;
+
+    color: #4c4841;
+}
+
+
+/* Texto completo tachado */
+
+.deleted-note-content {
+    position: relative;
+
+    font-size: 16px;
+
+    line-height: 1.55;
+
+    font-weight: 800;
+
+    text-decoration-line: line-through;
+
+    text-decoration-thickness: 2px;
+
+    text-decoration-color:
+        rgba(130,55,55,.75);
+}
+
+
+/* Encabezado de la nota */
+
+.deleted-note-label {
+    display: inline-block;
+
+    margin-right: 8px;
+
+    font-size: 11px;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-weight: 700;
+
+    letter-spacing: .7px;
+
+    color: #91897d;
+}
+
+
+/* Fecha */
+
+.deleted-note-date {
+    position: absolute;
+
+    right: 0;
+    top: 7px;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    color: #aaa299;
+
+    white-space: nowrap;
+}
+
+
+/* Línea manuscrita de separación */
+
+.deleted-note:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    bottom: -1px;
+
+    height: 1px;
+
+    background:
+        rgba(110,100,90,.12);
+}
+
+
+/* =====================================================
+   CUADERNO VACÍO
+===================================================== */
+
+.empty-notebook {
+    padding: 25px 0;
+
+    font-family:
+        "Segoe Print",
+        "Bradley Hand",
+        cursive;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: rgba(80,75,68,.35);
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   CONTADOR DEL CUADERNO
+===================================================== */
+
+.notebook-counter {
+    display: inline-block;
+
+    margin-left: 6px;
+
+    min-width: 17px;
+
+    padding: 1px 5px;
+
+    border-radius: 10px;
+
+    background: rgba(130,90,70,.12);
+
+    font-size: 8px;
+
+    text-align: center;
+
+    vertical-align: middle;
+}
+
+
+/* =====================================================
+   MÓVIL
+===================================================== */
+
+@media (max-width: 560px) {
+
+    .main-tabs {
+        margin-top: 10px;
+    }
+
+    .tab-button {
+        padding: 7px 14px;
+    }
+
+    .notebook-page {
+        padding-left: 38px;
+        padding-right: 18px;
+    }
+
+    .notebook-page::before {
+        left: 27px;
+    }
+
+    .deleted-note-date {
+        position: static;
+
+        display: block;
+
+        margin-top: 2px;
+    }
+
+    .deleted-note {
+        padding-right: 0;
+    }
+
+}
+
+/* =====================================
+   TAREAS CON CHECK: DISEÑO LIMPIO
+===================================== */
+.note-content {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-height: 120px;
+    max-height: 260px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    padding-right: 5px;
+    box-sizing: border-box;
+    cursor: default;
+}
+
+.task-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    width: 100%;
+}
+
+.task-check {
+    appearance: none;
+    flex: 0 0 17px;
+    width: 17px;
+    height: 17px;
+    margin: 5px 0 0;
+    border: 1.5px solid rgba(63,58,52,.58);
+    border-radius: 4px;
+    background: rgba(255,255,255,.24);
+    cursor: pointer;
+    position: relative;
+}
+
+.task-check:checked {
+    background: rgba(63,58,52,.78);
+    border-color: rgba(63,58,52,.78);
+}
+
+.task-check:checked::after {
+    content: "✓";
+    position: absolute;
+    color: white;
+    font: 700 13px/15px "Segoe UI", sans-serif;
+    left: 2px;
+    top: 0;
+}
+
+.task-text {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #3f3a34;
+    font: inherit;
+    line-height: 1.45;
+    font-weight: 800;
+}
+
+.task-text::placeholder {
+    color: rgba(70,65,55,.30);
+    font-weight: 500;
+}
+
+.task-row.is-done .task-text {
+    text-decoration: line-through;
+    opacity: .48;
+}
+
+.task-row.is-done .task-check {
+    opacity: .75;
+}
+
+.task-text:focus::placeholder {
+    color: rgba(70,65,55,.18);
+}
+
+
+/* =====================================================
+   AJUSTES: CONTENIDO DENTRO DEL POST-IT
+   El contenido se desplaza dentro de la nota y nunca
+   sobresale de sus bordes.
+===================================================== */
+
+.note {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.note-heading {
+    flex: 0 0 auto;
+}
+
+.note-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: 0;
+    max-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(85, 75, 60, .35) transparent;
+    padding-right: 5px;
+}
+
+.note-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.note-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.note-content::-webkit-scrollbar-thumb {
+    background: rgba(85, 75, 60, .30);
+    border-radius: 8px;
+}
+
+.task-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 7px;
+}
+
+.task-check {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    margin: 4px 0 0;
+    accent-color: #77705f;
+    cursor: pointer;
+}
+
+.task-text {
+    flex: 1 1 auto;
+    width: 0;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.task-text::placeholder {
+    color: rgba(70, 65, 55, .34);
+    opacity: 1;
+}
+
+.task-row.is-done .task-text {
+    color: rgba(63, 58, 52, .48);
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}
+
+/* La nota grande conserva su zona de escritura más alta. */
+.all-note .note-content {
+    min-height: 0;
+}
+
+/* =====================================================
+   CALENDARIO MENSUAL
+===================================================== */
+
+.calendar-note {
+    --paper-color: #fffdf7;
+    min-height: 320px;
+    padding: 15px 15px 13px;
+    overflow: hidden;
+    cursor: default;
+}
+
+.calendar-header {
+    position: relative;
+    z-index: 4;
+}
+
+.calendar-header .calculator-title {
+    margin-bottom: 4px;
+}
+
+.calendar-month-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    margin-bottom: 8px;
+    color: #4d4942;
+    font-size: 12px;
+}
+
+.calendar-month-controls strong {
+    text-transform: capitalize;
+    font-weight: 700;
+    text-align: center;
+}
+
+.calendar-nav {
+    flex: 0 0 25px;
+    width: 25px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: rgba(70, 60, 45, .08);
+    color: #514b43;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.calendar-nav:hover {
+    background: rgba(70, 60, 45, .16);
+}
+
+.calendar-weekdays,
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 3px;
+    text-align: center;
+}
+
+.calendar-weekdays {
+    margin-bottom: 4px;
+    color: #9a9286;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.calendar-days {
+    position: relative;
+    z-index: 3;
+}
+
+.calendar-day {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    height: 25px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #514b43;
+    font: inherit;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.calendar-day:hover {
+    background: rgba(80, 70, 55, .10);
+}
+
+.calendar-day.is-selected {
+    background: #e9d98b;
+    color: #3f392d;
+    font-weight: 800;
+}
+
+.calendar-day.is-today:not(.is-selected) {
+    outline: 1px solid rgba(150, 120, 60, .55);
+    outline-offset: -2px;
+}
+
+.calendar-day.is-outside {
+    color: rgba(90, 85, 75, .28);
+}
+
+.calendar-day.has-events::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #c66c6c;
+    transform: translateX(-50%);
+}
+
+.calendar-day.is-selected.has-events::after {
+    background: #6f6040;
+}
+
+.calendar-selected {
+    position: relative;
+    z-index: 3;
+    margin-top: 9px;
+    padding-top: 7px;
+    border-top: 1px solid rgba(100, 90, 70, .13);
+}
+
+.calendar-selected-label {
+    margin-bottom: 5px;
+    color: #6b6256;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.calendar-events {
+    max-height: 76px;
+    overflow-y: auto;
+    margin-bottom: 6px;
+}
+
+.calendar-event {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    margin: 0 0 4px;
+    color: #4b453d;
+    font-size: 11px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.calendar-event-text {
+    flex: 1;
+    min-width: 0;
+    white-space: pre-wrap;
+}
+
+.calendar-event-delete {
+    flex: 0 0 auto;
+    padding: 0 3px;
+    border: 0;
+    background: transparent;
+    color: rgba(90, 75, 60, .45);
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.calendar-event-delete:hover {
+    color: #9c4545;
+}
+
+.calendar-empty {
+    margin: 0 0 6px;
+    color: rgba(80, 75, 68, .48);
+    font-size: 10px;
+    font-style: italic;
+}
+
+.calendar-event-form {
+    display: flex;
+    gap: 5px;
+}
+
+.calendar-event-form input {
+    flex: 1;
+    width: 0;
+    min-width: 0;
+    padding: 6px 7px;
+    border: 1px solid rgba(90, 80, 65, .15);
+    border-radius: 5px;
+    outline: none;
+    background: rgba(255, 255, 255, .58);
+    color: #4b453d;
+    font: inherit;
+    font-size: 10px;
+}
+
+.calendar-event-form input:focus {
+    border-color: rgba(150, 120, 60, .55);
+}
+
+.calendar-event-form button {
+    flex: 0 0 26px;
+    width: 26px;
+    border: 0;
+    border-radius: 5px;
+    background: rgba(205, 181, 105, .55);
+    color: #4b453d;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+@media (max-width: 560px) {
+    .calendar-note {
+        min-height: 330px;
+    }
+
+    .calendar-day {
+        height: 28px;
+    }
+}
+
+/* =====================================================
+   POST-IT URGENTES: MÁS VISIBLES E IMPONENTES
+===================================================== */
+.urgent {
+    --paper-color: #f19a9c;
+    box-shadow:
+        inset 6px 0 0 rgba(132, 24, 32, .72),
+        0 7px 13px rgba(112, 24, 30, .20),
+        0 14px 24px rgba(80, 25, 25, .11);
+}
+
+.urgent .note-heading {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 13px;
+    padding: 0 22px 9px 2px;
+    border-bottom: 2px solid rgba(125, 23, 30, .42);
+    color: #751c22;
+    font-weight: 900;
+    letter-spacing: .55px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(255,255,255,.25);
+}
+
+.urgent .note-heading::before {
+    content: "⚠";
+    display: inline-block;
+    margin-right: 2px;
+    color: #8c171e;
+    font-family: "Segoe UI Symbol", sans-serif;
+    font-size: 17px;
+    line-height: 1;
+}
+
+.urgent .recipient-input {
+    color: #65161c;
+    border-bottom: 2px solid rgba(101, 22, 28, .72);
+    font-weight: 900;
+}
+
+.urgent .note-content {
+    font-weight: 900;
+    color: #4d171a;
+}
+
+.urgent .task-check {
+    accent-color: #8c2027;
+    border-color: rgba(115, 24, 31, .7);
+}
+
+.urgent .delete-note {
+    color: #74181e;
+    font-weight: 900;
+}
+
+.urgent:focus-within {
+    box-shadow:
+        inset 6px 0 0 rgba(132, 24, 32, .82),
+        0 0 0 2px rgba(132, 24, 32, .22),
+        0 9px 18px rgba(112, 24, 30, .22),
+        0 16px 26px rgba(80, 25, 25, .12);
+}
+
+
+/* =====================================================
+   PESTAÑA MIS NOTAS
+===================================================== */
+.my-notes-view { padding: 18px 7px 35px; }
+.my-notes-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 22px; }
+.my-notes-header h2 { margin: 0 0 5px; color: #514d45; font-size: 20px; font-weight: 800; }
+.my-notes-header p { margin: 0; color: #8b857b; font-size: 12px; }
+.change-user-button { border: 1px solid rgba(90,80,65,.16); border-radius: 7px; padding: 8px 12px; background: #f8f5ec; color: #625c52; font-size: 11px; font-weight: 700; cursor: pointer; }
+.my-notes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); align-items: start; gap: 18px; }
+.my-note-card { position: relative !important; inset: auto !important; grid-column: auto !important; grid-row: auto !important; width: 100%; min-width: 0; min-height: 205px; margin: 0; transform: none !important; cursor: default; }
+.my-note-card .note-content { max-height: 270px; overflow-y: auto; }
+.my-note-card .task-text { cursor: default; }
+.my-notes-empty { padding: 25px 12px; text-align: center; color: #8b857b; font-size: 14px; }
+@media (max-width: 600px) { .my-notes-header { align-items: flex-start; } .my-notes-grid { grid-template-columns: 1fr; } }
+
+
+/* Post-it personales de MIS NOTAS y selección de rango del calendario */
+.personal-note-card {
+    background: #fff3a6 !important;
+    min-height: 190px;
+}
+.personal-note-content {
+    min-height: 130px;
+    outline: none;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.personal-note-content:empty::before {
+    content: attr(data-placeholder);
+    color: rgba(80, 70, 35, .48);
+    pointer-events: none;
+}
+.calendar-event-form {
+    flex-wrap: wrap;
+}
+.calendar-range-label {
+    align-self: center;
+    font-size: 10px;
+    color: #77736c;
+}
+.calendar-event-form input[type="date"] {
+    min-width: 0;
+    max-width: 145px;
+    border: 1px solid rgba(90,80,65,.18);
+    border-radius: 5px;
+    padding: 6px;
+    background: #fffdf7;
+    color: #625c52;
+    font: inherit;
+}
+
+/* Corrección definitiva: el texto normal debe fluir y saltar de línea dentro del Post-it. */
+.note-content {
+    display: block;
+    flex: 1 1 0%;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Las filas de tareas mantienen su propia disposición horizontal. */
+.note-content .task-row {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+}
+.note-content .task-text {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+
+/* Texto de tareas: textarea multilínea que crece y envuelve el texto. */
+.note-content .task-row {
+    align-items: flex-start;
+    min-width: 0;
+    width: 100%;
+}
+.note-content .task-text {
+    display: block;
+    flex: 1 1 0;
+    width: 0;
+    min-width: 0;
+    max-width: 100%;
+    height: 28px;
+    min-height: 28px;
+    margin: 0;
+    padding: 2px 0;
+    box-sizing: border-box;
+    border: 0;
+    outline: 0;
+    resize: none;
+    overflow: hidden;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.4;
+    font: inherit;
+    background: transparent;
+}
+
+
+/* COLORES PERSONALIZABLES DE LOS DÍAS DEL CALENDARIO */
+.calendar-day.day-color-green { background: #a9d9a5; color: #214d27; font-weight: 800; }
+.calendar-day.day-color-yellow { background: #ffe58a; color: #5b4811; font-weight: 800; }
+.calendar-day.day-color-red { background: #f2a0a0; color: #6a1f1f; font-weight: 800; }
+.calendar-day.day-color-green:hover { background: #91ca8c; }
+.calendar-day.day-color-yellow:hover { background: #f4d66d; }
+.calendar-day.day-color-red:hover { background: #e98a8a; }
+
+.calendar-color-controls {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 0 7px;
+    color: #756b5e;
+    font-size: 10px;
+    font-weight: 700;
+}
+.calendar-color-button {
+    width: 19px;
+    height: 19px;
+    padding: 0;
+    border: 2px solid rgba(80, 70, 55, .2);
+    border-radius: 50%;
+    cursor: pointer;
+}
+.calendar-color-button.color-green { background: #a9d9a5; }
+.calendar-color-button.color-yellow { background: #ffe58a; }
+.calendar-color-button.color-red { background: #f2a0a0; }
+.calendar-color-button.is-active {
+    outline: 2px solid #51483c;
+    outline-offset: 2px;
+}
+.calendar-color-clear {
+    margin-left: auto;
+    padding: 3px 7px;
+    border: 1px solid rgba(90, 80, 65, .2);
+    border-radius: 5px;
+    background: rgba(255,255,255,.55);
+    color: #6b6256;
+    font: inherit;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+
+/* Calendario mensual: cuadrícula clara y colores visibles por día. */
+.calendar-note {
+    min-height: 0;
+    height: auto;
+    overflow: visible;
+    padding: 18px;
+}
+.calendar-month-controls {
+    margin: 4px 0 14px;
+    font-size: 15px;
+}
+.calendar-nav {
+    flex-basis: 34px;
+    width: 34px;
+    height: 32px;
+    font-size: 25px;
+}
+.calendar-weekdays,
+.calendar-days {
+    gap: 5px;
+}
+.calendar-weekdays {
+    margin-bottom: 7px;
+    font-size: 12px;
+}
+.calendar-day {
+    height: 42px;
+    border-radius: 9px;
+    background: rgba(100, 90, 70, .055);
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+.calendar-day:hover {
+    background: rgba(80, 70, 55, .13);
+    transform: scale(1.03);
+}
+.calendar-day.is-selected {
+    outline: 3px solid #51483c;
+    outline-offset: -3px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.65);
+}
+.calendar-day.is-outside {
+    opacity: .38;
+}
+.calendar-day.has-events::after {
+    bottom: 5px;
+    width: 5px;
+    height: 5px;
+    background: #7b4a9e;
+}
+.calendar-day.day-color-green { background: #a9d9a5; color: #214d27; font-weight: 800; }
+.calendar-day.day-color-yellow { background: #ffe58a; color: #5b4811; font-weight: 800; }
+.calendar-day.day-color-red { background: #f2a0a0; color: #6a1f1f; font-weight: 800; }
+.calendar-day.day-color-green:hover { background: #91ca8c; }
+.calendar-day.day-color-yellow:hover { background: #f4d66d; }
+.calendar-day.day-color-red:hover { background: #e98a8a; }
+.calendar-selected {
+    margin-top: 16px;
+    padding-top: 13px;
+}
+.calendar-selected-label {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+.calendar-color-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 0 0 12px;
+    font-size: 12px;
+}
+.calendar-color-button {
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(70,60,45,.22);
+}
+.calendar-color-button.is-active {
+    outline: 3px solid #51483c;
+    outline-offset: 2px;
+}
+.calendar-color-clear {
+    padding: 6px 10px;
+    font-size: 12px;
+}
+@media (max-width: 520px) {
+    .calendar-note { padding: 12px; }
+    .calendar-days, .calendar-weekdays { gap: 3px; }
+    .calendar-day { height: 35px; font-size: 12px; }
+}
+
+/* =====================================================
+   CALENDARIO MENSUAL COMPLETO Y LEGIBLE
+   Se amplía el calendario para mostrar el mes entero,
+   con los colores visibles en cada día.
+===================================================== */
+.notes-grid .calendar-note {
+    grid-column: span 1;
+    align-self: stretch;
+    width: 100%;
+    min-width: 0;
+    min-height: 350px;
+    height: auto;
+    padding: 12px;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    --paper-color: #fffdf7;
+}
+.calendar-note .calendar-header {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.calendar-note .calendar-header .calculator-title {
+    font-size: 12px;
+    margin-bottom: 0;
+}
+.calendar-note .calendar-month-controls {
+    display: grid;
+    grid-template-columns: 27px minmax(0, 1fr) 27px;
+    align-items: center;
+    gap: 4px;
+    margin: 0 0 7px;
+    font-size: 12px;
+}
+.calendar-note .calendar-nav {
+    width: 27px;
+    height: 25px;
+    flex-basis: 27px;
+    font-size: 19px;
+}
+.calendar-note .calendar-weekdays,
+.calendar-note .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 3px;
+    width: 100%;
+}
+.calendar-note .calendar-weekdays {
+    margin: 0 0 4px;
+    font-size: 10px;
+    line-height: 1.4;
+}
+.calendar-note .calendar-day {
+    width: 100%;
+    height: 25px;
+    min-width: 0;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.calendar-note .calendar-day.is-outside {
+    opacity: .32;
+}
+.calendar-note .calendar-day.is-selected {
+    outline: 3px solid #51483c;
+    outline-offset: -3px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.7);
+}
+.calendar-note .calendar-day.has-events::after {
+    bottom: 4px;
+    width: 5px;
+    height: 5px;
+}
+.calendar-note .calendar-selected {
+    margin-top: 8px;
+    padding-top: 7px;
+}
+.calendar-note .calendar-selected-label {
+    margin-bottom: 5px;
+    font-size: 11px;
+}
+.calendar-note .calendar-color-controls {
+    gap: 6px;
+    margin-bottom: 7px;
+    font-size: 10px;
+}
+.calendar-note .calendar-color-button {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+}
+.calendar-note .calendar-color-clear {
+    margin-left: auto;
+    padding: 4px 7px;
+    font-size: 10px;
+}
+.calendar-note .calendar-events {
+    max-height: 55px;
+}
+.calendar-note .calendar-empty {
+    font-size: 10px;
+}
+.calendar-note .calendar-event-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.calendar-note .calendar-event-form input[type="text"] {
+    flex: 1 1 100%;
+    width: 100%;
+    min-height: 27px;
+    font-size: 10px;
+}
+.calendar-note .calendar-event-form input[type="date"] {
+    flex: 1 1 95px;
+    max-width: none;
+    min-height: 26px;
+    font-size: 10px;
+}
+.calendar-note .calendar-range-label {
+    align-self: center;
+    font-size: 9px;
+}
+.calendar-note .calendar-event-form button {
+    flex: 0 0 27px;
+    width: 27px;
+    min-height: 27px;
+}
+@media (max-width: 560px) {
+    .notes-grid .calendar-note {
+        grid-column: auto;
+        min-height: 0;
+        padding: 14px;
+    }
+    .calendar-note .calendar-days,
+    .calendar-note .calendar-weekdays { gap: 4px; }
+    .calendar-note .calendar-day { height: 38px; font-size: 13px; }
+    .calendar-note .calendar-month-controls { grid-template-columns: 32px minmax(0,1fr) 32px; }
+    .calendar-note .calendar-nav { width: 32px; flex-basis: 32px; height: 30px; }
+}
+
+/* Ajustes solicitados: círculo dibujado para el día de hoy y calculadora a tamaño completo. */
+.calendar-note .calendar-day.is-today {
+    position: relative;
+    z-index: 2;
+}
+.calendar-note .calendar-day.is-today::before {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border: 2px solid #51483c;
+    border-radius: 48% 53% 46% 55% / 54% 45% 57% 47%;
+    transform: rotate(-9deg);
+    pointer-events: none;
+}
+.calendar-note .calendar-day.is-today.is-selected::before {
+    border-color: #51483c;
+    inset: 1px;
+    border-width: 2px;
+}
+
+/* La calculadora ocupa toda la altura de su tarjeta y distribuye las teclas. */
+.notes-grid > .calculator-note {
+    box-sizing: border-box;
+    min-height: 350px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.notes-grid > .calculator-note > .calculator {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+}
+.notes-grid > .calculator-note .calc-display {
+    flex: 0 0 34px;
+}
+.notes-grid > .calculator-note .calculator-buttons {
+    flex: 1 1 auto;
+    grid-template-rows: repeat(5, minmax(0, 1fr));
+    min-height: 0;
+}
+.notes-grid > .calculator-note .calculator-buttons button {
+    height: auto;
+    min-height: 0;
+}
+@media (max-width: 560px) {
+    .notes-grid > .calculator-note { min-height: 300px; }
+}
